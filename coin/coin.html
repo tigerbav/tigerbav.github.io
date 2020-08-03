@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(78, 78, 78);
+        min-height: 100vh;
+      }
+      .card {
+        position: relative;
+        width: 100px;
+        height: 100px;
+      }
+      .coin {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        backface-visibility: hidden;
+      }
+      .coin__img {
+        display: block;
+        width: 100%;
+      }
+      .front {
+        transform: perspective(600px) rotateX(0deg) rotateY(0deg);
+        transition: 2s;
+      }
+      .back {
+        transform: perspective(600px) rotateX(180deg) rotateY(0deg);
+        transition: 2s;
+      }
+      /* .card:hover .front {
+        transform: perspective(600px) rotateX(-540deg);
+      }
+      .card:hover .back {
+        transform: perspective(600px) rotateX(0deg);
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="coin front">
+        <img src="1.png" alt="" class="coin__img" />
+      </div>
+      <div class="coin back">
+        <img src="2.png" alt="" class="coin__img" />
+      </div>
+    </div>
+
+    <script>
+      let front = document.querySelector(".front");
+      let back = document.querySelector(".back");
+      let card = document.querySelector(".card");
+
+      function coin() {
+        min = 2;
+        max = 10;
+        let rand = Math.floor(min + Math.random() * (max + 1 - min));
+
+        console.log(rand);
+
+        rand *= 180;
+
+        console.log(rand);
+        front.style.transform = "perspective(600px) rotateX(-" + rand + "deg )";
+        back.style.transform =
+          "perspective(600px) rotateX(" + +(rand + 180) + "deg )";
+      }
+      card.addEventListener("click", coin);
+    </script>
+  </body>
+</html>
